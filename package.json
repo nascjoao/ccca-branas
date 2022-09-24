@@ -6,7 +6,8 @@
   "author": "nascjoao <oi@joaonasc.dev>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/jest": "^29.0.3",
