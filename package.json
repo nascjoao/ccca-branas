@@ -1,0 +1,15 @@
+{
+  "name": "ccca-branas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:nascjoao/ccca-branas.git",
+  "author": "nascjoao <oi@joaonasc.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jest": "^29.0.3",
+    "jest": "^29.0.3",
+    "ts-jest": "^29.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  }
+}
