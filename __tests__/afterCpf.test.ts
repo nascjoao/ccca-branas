@@ -21,7 +21,7 @@ test('Deve retornar true se o CPF for válido, mesmo com dígitos verificadores 
 })
 
 test('Deve retornar false caso o valor passado tenha mais do que 14 caracteres', () => {
-  expect(validateCPF('140.842.901---22')).toBe(false)
+  expect(validateCPF('140.842.901-222')).toBe(false)
 })
 
 test('Deve retornar false caso o valor passado tenha menos do que 11 caracteres', () => {

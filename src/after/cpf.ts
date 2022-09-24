@@ -7,13 +7,7 @@ function hasLengthRange(string: string, min: number, max: number) {
 }
 
 function normalizeCPF(cpf: string) {
-  if (typeof cpf === 'string') {
-    return cpf
-      .replace('.','')
-      .replace('.','')
-      .replace('-','')
-      .replace(" ","");  
-  }
+  return cpf.replace(/\.|\-|\s/g, '');
 }
 
 function getCPFValidationDigits(cpf: string) {
@@ -25,9 +19,10 @@ function getCPFValidationDigits(cpf: string) {
     secondSumOfDigits = secondSumOfDigits + ( 12 - cpfIndex ) * digit;  
   };
   const firstDigit = (firstSumOfDigits % 11) < 2 ? 0 : 11 - (firstSumOfDigits % 11);
+  secondSumOfDigits += 2 * firstDigit;
   return {
     firstDigit,
-    secondDigit: ((secondSumOfDigits + 2 * firstDigit) % 11) < 2 ? 0 : 11 - ((secondSumOfDigits + 2 * firstDigit) % 11),
+    secondDigit: (secondSumOfDigits % 11) < 2 ? 0 : 11 - (secondSumOfDigits % 11),
   }
 }
 
