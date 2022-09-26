@@ -1,34 +1,28 @@
+import Coupon from "./Coupon";
 import Cpf from "./Cpf";
-
-type OrderDetails = {
-  description: string;
-  price: number;
-  quantity: number;
-}
+import Item from "./Item";
+import OrderItem from "./OrderItem";
 
 export default class Order {
-  readonly orders: OrderDetails[];
-  private coupon?: number;
+  readonly orderItems: OrderItem[];
+  private coupon?: Coupon;
 
   constructor (readonly cpf: string) {
-    this.orders = [];
+    this.orderItems = [];
     if (!new Cpf(cpf).validate()) throw new Error('CPF inválido');
   }
 
-  addOrder(order: OrderDetails) {
-    this.orders.push(order);
+  addItem(item: Item, quantity: number) {
+    this.orderItems.push(new OrderItem(item.id, item.price, quantity));
   }
 
-  /**
-   * @param coupon e.g. 10 is a value for a 10% discount coupon
-   */
-  addCoupon(coupon: number) {
+  addCoupon(coupon: Coupon) {
     this.coupon = coupon;
   }
 
   getTotal() {
-    let total = this.orders.reduce((total, order) => total += order.price * order.quantity, 0);
-    if (this.coupon) total -= total * this.coupon / 100;
+    let total = this.orderItems.reduce((total, orderItem) => total += orderItem.getTotal(), 0);
+    if (this.coupon) total -= this.coupon.calculateDiscount(total);
     return Number(total.toFixed(2));
   }
 }
